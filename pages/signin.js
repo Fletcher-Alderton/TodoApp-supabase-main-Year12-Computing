@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { supabaseClient } from "../lib/client";
+import Link from "next/link";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ const SignIn = () => {
         email: email,
         password: password,
       });
-  
+
       if (error) throw error;
       const userID = user?.id;
       router.push("/");
@@ -21,7 +22,10 @@ const SignIn = () => {
       console.log(error);
     }
   }
-  
+
+  async function signUphandler() {
+    router.push("/signup");
+  }
 
   return (
     <div
@@ -41,7 +45,8 @@ const SignIn = () => {
           backgroundColor: "#4A4A4A", // Tailwind CSS bg-white
           padding: "2rem",
           borderRadius: "0.5rem",
-          boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)", // Tailwind CSS shadow-lg
+          boxShadow:
+            "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)", // Tailwind CSS shadow-lg
         }}
       >
         <h1
@@ -50,7 +55,7 @@ const SignIn = () => {
             fontWeight: "700",
             marginBottom: "1.5rem",
             textAlign: "center",
-            color: "#FEFEFE"
+            color: "#FEFEFE",
           }}
         >
           Login In
@@ -153,24 +158,22 @@ const SignIn = () => {
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            width: "100%",
-            alignItems: "center",
-            marginTop: "1rem",
+            justifyContent: "space-between",
+            marginTop: "2rem", // Add margin-top of 2rem
           }}
         >
           <button
             type="button"
             style={{
+              flex: 1, // Make the buttons take up equal space
+              margin: "0 0.5rem", // Add horizontal margin between buttons
               padding: "0.5rem 1rem",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
               backgroundColor: "#3B82F6", // Tailwind CSS bg-blue-500
               color: "#FFFFFF", // Tailwind CSS text-white
               fontSize: "1rem",
               fontWeight: "600",
-              boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)", // Tailwind CSS shadow-md
+              boxShadow:
+                "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)", // Tailwind CSS shadow-md
               outline: "none",
               ringWidth: "2px", // Tailwind CSS focus:ring-2
               ringColor: "#3B82F6", // Tailwind CSS focus:ring-blue-500
@@ -186,6 +189,34 @@ const SignIn = () => {
             onClick={signInWithEmail}
           >
             Login
+          </button>
+          <button
+            type="button"
+            style={{
+              flex: 1, // Make the buttons take up equal space
+              margin: "0 0.5rem", // Add horizontal margin between buttons
+              padding: "0.5rem 1rem",
+              backgroundColor: "#3B82F6", // Tailwind CSS bg-blue-500
+              color: "#FFFFFF", // Tailwind CSS text-white
+              fontSize: "1rem",
+              fontWeight: "600",
+              boxShadow:
+                "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)", // Tailwind CSS shadow-md
+              outline: "none",
+              ringWidth: "2px", // Tailwind CSS focus:ring-2
+              ringColor: "#3B82F6", // Tailwind CSS focus:ring-blue-500
+              ringOffsetWidth: "0.125rem", // Tailwind CSS focus:ring-offset-2
+              ringOffsetColor: "#FFFFFF", // Tailwind CSS focus:ring-offset-transparent
+              borderRadius: "0.375rem",
+              transitionProperty: "background-color, color, box-shadow",
+              transitionTimingFunction: "ease-in",
+              transitionDuration: "200ms",
+              textAlign: "center",
+              cursor: "pointer",
+            }}
+            onClick={signUphandler}
+          >
+            Sign Up
           </button>
         </div>
       </div>

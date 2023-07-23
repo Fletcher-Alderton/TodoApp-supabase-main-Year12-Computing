@@ -9,19 +9,19 @@ const SignIn = () => {
 
   async function signInWithEmail() {
     try {
-      const { email, password } = await supabaseClient.auth.signIn({
+      const { user, error } = await supabaseClient.auth.signIn({
         email: email,
         password: password,
       });
-
-      if (resp.error) throw resp.error;
-      const userID = resp.data.user?.id;
+  
+      if (error) throw error;
+      const userID = user?.id;
       router.push("/");
     } catch (error) {
-      // Add 'error' parameter to the catch block
       console.log(error);
     }
   }
+  
 
   return (
     <div

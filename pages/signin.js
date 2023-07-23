@@ -9,7 +9,7 @@ const SignIn = () => {
 
   async function signInWithEmail() {
     try {
-      const { email, password } = await supabaseClient.auth.signInWithPassword({
+      const { email, password } = await supabaseClient.auth.signIn({
         email: email,
         password: password,
       });
